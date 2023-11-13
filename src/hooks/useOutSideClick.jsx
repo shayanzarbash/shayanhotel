@@ -1,12 +1,23 @@
 import { useEffect } from "react"
 
-const useOutSideClick = () => {
+const useOutSideClick = (ref, exceptId, cb) => {
+
+
 
     useEffect(() => {
-    
-        return () => {
+
+        function handleOutSideClick(e) {
+            if (ref.current && !ref.current.contains(e.target) && e.target.id !== exceptId) {
+                cb();
+            }
         }
-    }, []);
+
+        document.addEventListener("mousedown", handleOutSideClick)
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutSideClick)
+        }
+    }, [ref, exceptId, cb]);
 
     return (
         <div>useOutSideClick</div>
