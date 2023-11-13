@@ -25,7 +25,7 @@ const Header = () => {
                 </div>
                 <div className="headerSearchItem">
                     <HiCalendar className='headerIcon dateIcon' />
-                    <div className='dateDropDown'>03/02/2023</div>
+                    <div className='dateDropDown'>03/02/2024</div>
                     <span className="seprator"></span>
                 </div>
                 <div className="headerSearchItem">
