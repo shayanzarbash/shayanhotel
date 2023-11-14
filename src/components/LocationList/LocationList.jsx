@@ -20,7 +20,6 @@ const LocationList = () => {
                     </div>
                 })}
             </div>
-
         </div>
     )
 }

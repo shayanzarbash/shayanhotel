@@ -7,18 +7,21 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 
 const Header = () => {
 
-    const [destination, setDestination] = useState('');
+
+    // eslint-disable-next-line no-unused-vars
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [destination, setDestination] = useState(searchParams.get("destination" || ""));
     const [openOption, setOpenOption] = useState(false);
     const [option, setOption] = useState({
         adult: 1,
         children: 0,
         room: 1
     });
-
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -29,7 +32,6 @@ const Header = () => {
 
     const [openDate, setOpenDate] = useState(false);
 
-
     const handlerOptions = (name, opration) => {
         setOption((prev) => {
             return {
@@ -37,6 +39,22 @@ const Header = () => {
                 [name]: opration === 'inc' ? option[name] + 1 : option[name] - 1
             }
         })
+    };
+
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        const encodedParams = createSearchParams({
+            date: JSON.stringify(date),
+            destination,
+            option: JSON.stringify(option),
+        });
+
+        // setSearchParams(encodedParams);
+        navigate({
+            pathname: '/hotels',
+            search: encodedParams.toString(),
+        });
     }
 
     return (
@@ -83,7 +101,7 @@ const Header = () => {
                     <span className="seprator"></span>
                 </div>
                 <div className="headerSearchItem">
-                    <button className='headerSearchBtn'>
+                    <button className='headerSearchBtn' onClick={handleSearch}>
                         <HiSearch className='headerIcon' />
                     </button>
                 </div>

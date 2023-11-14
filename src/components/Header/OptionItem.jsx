@@ -2,7 +2,6 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 
 const OptionItem = ({ type, options, minLimit, handlerOptions }) => {
 
-    console.log(options);
     return (
         <div className="guestOptionItem">
             <span className="optionText">{type}</span>
